@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    /**
+     * 生命周期
+     * Mounting：已插入真实 DOM
+     *Updating：正在被重新渲染
+     *Unmounting：已移出真实 DOM
+     *
+     *
+     *will 函数在进入状态之前调用，did 函数在进入状态之后调用
+     *
+     *
+     *componentWillMount()
+     *componentDidMount()  可以设置Ajax请求
+     *componentWillUpdate(object nextProps, object nextState)
+     *componentDidUpdate(object prevProps, object prevState)
+     *componentWillUnmount()
+     *
+     *
+     *componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+     *shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+     *
+     *style={{opacity: this.state.opacity}}属性双括号
+     * */
+    var Hello = React.createClass({
+        getInitialState: function () {
+            return {
+                opacity/*不透明度*/: 1.0
+            };
+        },
+
+        componentDidMount: function () {
+            this.timer = setInterval(function () {
+                var opacity = this.state.opacity;
+                opacity -= .05;
+                if (opacity < 0.1) {
+                    opacity = 1.0;
+                }
+                this.setState({
+                    opacity: opacity
+                });
+            }.bind(this), 100);/*100ms*/
+        },
+
+        render: function () {
+            return (
+                <div style={{opacity: this.state.opacity}}>
+                    Hello {this.props.name}
+                </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+        <Hello name="world"/>,
+        document.getElementById('example')
+    );
+</script>
+</body>
+</html>

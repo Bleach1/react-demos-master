@@ -1,0 +1,6 @@
+ ReactDOM.render(
+        <HelloMessage name="John" />,   //要写的内容
+        document.getElementById('example')//要插入的html节点
+      );
+
+
